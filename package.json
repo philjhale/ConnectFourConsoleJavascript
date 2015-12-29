@@ -1,0 +1,21 @@
+{
+  "name": "connect-four-javascript",
+  "version": "1.0.0",
+  "description": "",
+  "main": "start.js",
+  "dependencies": {
+    "readline-sync": "^1.2.21"
+  },
+  "devDependencies": {
+    "chai": "^3.4.1",
+    "gulp": "^3.9.0",
+    "gulp-jslint-simple": "^1.0.1",
+    "jshint-stylish": "^2.1.0",
+    "mocha": "^2.3.4"
+  },
+  "scripts": {
+    "test": "test"
+  },
+  "author": "Phil Hale",
+  "license": "ISC"
+}

@@ -6,7 +6,9 @@ var Board = require("./board");
 
 //var userName = readlineSync.question('May x have your name? :');
 //console.log("you entered %s", userName);
-var gameBoard = new Board();
-gameBoard.display();
-gameBoard.drop("R", 3);
-gameBoard.display();
+var board = new Board();
+board.display();
+board.drop("R", 3);
+board.display();
+board.drop("R", 3);
+board.display();

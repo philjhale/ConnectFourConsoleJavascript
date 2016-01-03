@@ -21,6 +21,8 @@ Board.prototype._createGrid = function _createGrid(width, height) {
   return rows;
 };
 
+// TODO Check my usage of this
+// TODO Don't like this
 Board.prototype._getGrid = function _getGrid() {
   if (!this._grid) {
     this._grid = this._createGrid(this.numberOfColumns, this.numberOfRows);
@@ -46,6 +48,16 @@ Board.prototype._isNumeric = function _isNumeric(n) {
   return !isNaN(parseFloat(n)) && isFinite(n);
 };
 
+Board.prototype._isColumnFull = function _isColumnFull(columnIndex) {
+  for(var y = 0; y < this.numberOfRows; y += 1) {
+    if (this._getGrid()[columnIndex][y] === '-') { // TODO Not a great check
+      return false;
+    }
+  }
+  
+  return true;
+}
+
 Board.prototype._isValidDrop = function _isValidDrop(columnIndexStr) {
   var columnIndex;
 
@@ -58,13 +70,22 @@ Board.prototype._isValidDrop = function _isValidDrop(columnIndexStr) {
     return false;
   }
 
-  // TODO Check column full
+  if (this._isColumnFull(columnIndex)) {
+    return false;
+  }
 
   return true;
 };
 
-Board.prototype._getNextEmptyRowIndex = function _getNextEmptyRowIndex() {
-  // TODO
+Board.prototype._getNextEmptyRowIndex = function _getNextEmptyRowIndex(columnIndex) {  
+  for(var y = 0; y < this.numberOfRows; y += 1) {
+    if (this._getGrid()[columnIndex][y] === '-') { // TODO Not a great check
+      return y;
+    }
+  }
+  
+  // TODO Change?
+  throw "Column full";
 };
 
 Board.prototype.drop = function drop(disc, columnNumber) {
@@ -72,7 +93,7 @@ Board.prototype.drop = function drop(disc, columnNumber) {
   var columnIndex = columnNumber - 1;
 
   //  TODO Place in correct place
-  this._getGrid()[columnIndex][this._getNextEmptyRowIndex()] = disc;
+  this._getGrid()[columnIndex][this._getNextEmptyRowIndex(columnIndex)] = disc;
 
   return this._getGrid();
 };

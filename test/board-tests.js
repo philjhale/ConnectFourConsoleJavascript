@@ -26,7 +26,7 @@ describe("Board", function() {
 
     it("cannot drop into full column", function() {
       for (var i = 0; i < 6; i += 1) {
-          board.drop(null, "1")
+          board.drop("R", "1")
       }
 
       expect(board._isValidDrop("0")).to.equal(false);

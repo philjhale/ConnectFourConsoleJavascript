@@ -1,21 +1,27 @@
 var expect = require("chai").expect;
-var board = require("../board");
+var Board = require("../board");
 
 // https://semaphoreci.com/community/tutorials/getting-started-with-node-js-and-mocha
 // http://chaijs.com/api/bdd/
 
 describe("Board", function() {
+  var board = new Board(7, 6);
+  
+  beforeEach(function() {
+    board = new Board(7, 6);
+  });
+  
   describe("isValidDrop", function() {
     it("cannot drop into non numeric column", function() {
-      expect(board.isValidDrop("bumclouds")).to.equal(false);
+      expect(board._isValidDrop("bumclouds")).to.equal(false);
     });
 
     it("cannot drop into column index -1", function() {
-      expect(board.isValidDrop("-1")).to.equal(false);
+      expect(board._isValidDrop("-1")).to.equal(false);
     });
 
     it("cannot drop into column index greater than size of board", function() {
-      expect(board.isValidDrop("8")).to.equal(false);
+      expect(board._isValidDrop("8")).to.equal(false);
     });
 
     it("cannot drop into full column", function() {
@@ -23,15 +29,15 @@ describe("Board", function() {
           board.drop(null, "1")
       }
 
-      expect(board.isValidDrop("0")).to.equal(false);
+      expect(board._isValidDrop("0")).to.equal(false);
     });
 
     it("can drop into first column", function() {
-      expect(board.isValidDrop("0")).to.equal(true);
+      expect(board._isValidDrop("0")).to.equal(true);
     });
 
     it("can drop into last column", function() {
-      expect(board.isValidDrop("6")).to.equal(true);
+      expect(board._isValidDrop("6")).to.equal(true);
     });
   });
 

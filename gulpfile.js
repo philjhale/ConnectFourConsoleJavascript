@@ -8,7 +8,8 @@ gulp.task('lint', function () {
     .pipe(jslint.run({
       node: true,
       vars: true,
-      indent: 2
+      indent: 2,
+      nomen: true
     }))
     .pipe(jslint.report({
       reporter: require('jshint-stylish').reporter

@@ -1,12 +1,12 @@
 'use strict';
 
-var board = require("./board");
+var Board = require("./board");
 
 //var readlineSync = require('readline-sync');
 
 //var userName = readlineSync.question('May x have your name? :');
 //console.log("you entered %s", userName);
-
-board.display();
-board.drop("R", 3);
-board.display();
+var gameBoard = new Board();
+gameBoard.display();
+gameBoard.drop("R", 3);
+gameBoard.display();

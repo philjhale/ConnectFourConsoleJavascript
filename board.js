@@ -10,7 +10,7 @@ module.exports = (function () {
     for (x = 0; x < width; x += 1) {
       column = [];
       for (y = 0; y < height; y += 1) {
-        column.push(0); // TODO Replace with disc or something
+        column.push("-");
       }
       rows.push(column);
     }
@@ -31,14 +31,14 @@ module.exports = (function () {
     console.log("----------------------------------");
   }
 
-  function isNumeric (n) {
+  function isNumeric(n) {
     return !isNaN(parseFloat(n)) && isFinite(n);
   }
 
   function isValidDrop(columnIndexStr) {
     var columnIndex;
 
-    if (!isNumeric(columnIndex)) {
+    if (!isNumeric(columnIndexStr)) {
       return false;
     }
 
@@ -52,10 +52,18 @@ module.exports = (function () {
     return true;
   }
 
+  function getNextEmptyRowIndex() {
+    // TODO
+  }
+
   function drop(disc, columnNumber) {
     // TODO Check valid move
     var columnIndex = columnNumber - 1;
-    grid[columnIndex][0] = disc;
+
+    //  TODO Place in correct place
+    grid[columnIndex][getNextEmptyRowIndex()] = disc;
+
+    return grid;
   }
 
   function init() {

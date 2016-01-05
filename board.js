@@ -27,18 +27,18 @@ function Board(numberOfColumns, numberOfRows) {
     grid[x][y] = disc;
   };
 
+  this.isEmptyDiscAt = function (x, y) {
+    return grid[x][y] === '-'; // TODO Improve?
+  };
+
   this.getGrid = function () {
     return grid;
   };
 
-  this.isNumeric = function (n) {
-    return !isNaN(parseFloat(n)) && isFinite(n);
-  };
-
   this.isColumnFull = function (columnIndex) {
     var y;
-    for (y = 0; y < this.numberOfRows; y += 1) {
-      if (self.getDiscAt(columnIndex, y) === '-') { // TODO Not a great check
+    for (y = 0; y < self.numberOfRows; y += 1) {
+      if (self.isEmptyDiscAt(columnIndex, y)) {
         return false;
       }
     }
@@ -46,14 +46,7 @@ function Board(numberOfColumns, numberOfRows) {
     return true;
   };
 
-  this.isValidDrop = function (columnIndexStr) {
-    var columnIndex;
-
-    if (!self.isNumeric(columnIndexStr)) {
-      return false;
-    }
-
-    columnIndex = Number(columnIndexStr);
+  this.isValidDrop = function (columnIndex) {
     if (columnIndex < 0 || columnIndex >= self.numberOfColumns) {
       return false;
     }
@@ -68,7 +61,7 @@ function Board(numberOfColumns, numberOfRows) {
   this.getNextEmptyRowIndex = function (columnIndex) {
     var y;
     for (y = 0; y < self.numberOfRows; y += 1) {
-      if (self.getDiscAt(columnIndex, y) === '-') { // TODO Not a great check
+      if (self.isEmptyDiscAt(columnIndex, y)) {
         return y;
       }
     }
@@ -93,7 +86,6 @@ Board.prototype.drop = function drop(disc, columnNumber) {
 };
 
 Board.prototype.getDiscAt = function getDiscAt(x, y) {
-  //console.log(x + ' ' + y);
   return this.getGrid()[x][y];
 };
 

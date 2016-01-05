@@ -12,10 +12,6 @@ describe("Board", function() {
   });
 
   describe("drop", function() {
-    it("cannot drop into non numeric column", function() {
-      expect(board.drop.bind(board, "R", "bumclouds")).to.throw("Errors!");
-    });
-
     it("cannot drop into column index -1", function() {
       expect(board.drop.bind(board, "R", "-1")).to.throw("Errors!");
     });

@@ -1,9 +1,5 @@
 'use strict';
 
-var Board = require("./board");
-var HumanPlayer = require("./human-player");
-var ComputerPlayer = require("./computer-player");
-
 function Game(player1, player2, board) {
   this.player1 = player1;
   this.player2 = player2;

@@ -1,5 +1,7 @@
 'use strict';
 
+var solver = require("./solver");
+
 function Board(numberOfColumns, numberOfRows) {
   this.numberOfColumns = numberOfColumns || 7;
   this.numberOfRows = numberOfRows || 6;
@@ -76,7 +78,7 @@ function Board(numberOfColumns, numberOfRows) {
 
 Board.prototype.drop = function drop(columnNumber, disc) {
   var columnIndex = columnNumber - 1;
-  
+
   if (!this.isValidDrop(columnIndex)) {
     throw "Errors!"; // TODO Handle or change?
   }
@@ -91,12 +93,12 @@ Board.prototype.getDiscAt = function getDiscAt(x, y) {
 Board.prototype.display = function display() {
   var x, y;
   var line = '';
-  
+
   for (x = 1; x <= this.numberOfColumns; x += 1) {
     line += x + "\t";
   }
   console.log(line);
-  
+
   line = '';
   for (y = this.numberOfRows - 1; y >= 0; y -= 1) {
     for (x = 0; x < this.numberOfColumns; x += 1) {
@@ -106,6 +108,10 @@ Board.prototype.display = function display() {
     line = '';
   }
   console.log("-------------------------------------------------");
+};
+
+Board.prototype.isConnectFour = function isConnectFour() {
+  return solver.isConnectFour(this.getGrid());
 };
 
 module.exports = Board;

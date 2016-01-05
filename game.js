@@ -29,8 +29,13 @@ Game.prototype.play = function () {
     currentPlayer = this.getNextPlayer();
     columnSelection = currentPlayer.getColumnInput(1, this.board.numberOfColumns);
     this.board.drop(columnSelection, currentPlayer.disc);
-    
+
     this.board.display();
+
+    if (this.board.isConnectFour()) {
+      console.log("%s has won!", currentPlayer.name);
+      break;
+    }
   }
   //console.log(this.player2.getColumnInput());
 

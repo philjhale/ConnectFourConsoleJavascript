@@ -6,6 +6,10 @@ function Board(numberOfColumns, numberOfRows) {
   var grid = null;
   var self = this;
 
+  function getEmptyDisc() {
+    return "-";
+  }
+
   function createGrid(width, height) {
     var x, y;
     var column = [];
@@ -13,7 +17,7 @@ function Board(numberOfColumns, numberOfRows) {
     for (x = 0; x < width; x += 1) {
       column = [];
       for (y = 0; y < height; y += 1) {
-        column.push("-");
+        column.push(getEmptyDisc());
       }
       rows.push(column);
     }
@@ -28,7 +32,7 @@ function Board(numberOfColumns, numberOfRows) {
   };
 
   this.isEmptyDiscAt = function (x, y) {
-    return grid[x][y] === '-'; // TODO Improve?
+    return grid[x][y] === getEmptyDisc(); // TODO Improve?
   };
 
   this.getGrid = function () {
@@ -70,9 +74,9 @@ function Board(numberOfColumns, numberOfRows) {
   };
 }
 
-Board.prototype.drop = function drop(disc, columnNumber) {
+Board.prototype.drop = function drop(columnNumber, disc) {
   var columnIndex = columnNumber - 1;
-
+  
   if (!this.isValidDrop(columnIndex)) {
     throw "Errors!"; // TODO Handle or change?
   }
@@ -87,6 +91,13 @@ Board.prototype.getDiscAt = function getDiscAt(x, y) {
 Board.prototype.display = function display() {
   var x, y;
   var line = '';
+  
+  for (x = 1; x <= this.numberOfColumns; x += 1) {
+    line += x + "\t";
+  }
+  console.log(line);
+  
+  line = '';
   for (y = this.numberOfRows - 1; y >= 0; y -= 1) {
     for (x = 0; x < this.numberOfColumns; x += 1) {
       line += this.getDiscAt(x, y) + '\t';
@@ -94,7 +105,7 @@ Board.prototype.display = function display() {
     console.log(line);
     line = '';
   }
-  console.log("----------------------------------");
+  console.log("-------------------------------------------------");
 };
 
 module.exports = Board;

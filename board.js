@@ -66,22 +66,17 @@ function Board(numberOfColumns, numberOfRows) {
       }
     }
 
-    // TODO Change?
     throw "Column full";
   };
 }
 
 Board.prototype.drop = function drop(disc, columnNumber) {
-  var columnIndex = Number(columnNumber) - 1;
+  var columnIndex = columnNumber - 1;
 
-  // TODO Check valid move
   if (!this.isValidDrop(columnIndex)) {
-    throw "Errors!"; // TODO
+    throw "Errors!"; // TODO Handle or change?
   }
 
-  // TODO Need to convert to number or at least check
-
-  //  TODO Place in correct place
   this.setDiscAt(columnIndex, this.getNextEmptyRowIndex(columnIndex), disc);
 };
 

@@ -11,7 +11,7 @@ describe("Board", function() {
     board = new Board(7, 6);
   });
 
-  describe("isValidDrop", function() {
+  describe("drop", function() {
     it("cannot drop into non numeric column", function() {
       expect(board.drop.bind(board, "R", "bumclouds")).to.throw("Errors!");
     });

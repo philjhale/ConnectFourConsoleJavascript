@@ -5,6 +5,8 @@ var solver = require("./solver");
 function Board(numberOfColumns, numberOfRows) {
   this.numberOfColumns = numberOfColumns || 7;
   this.numberOfRows = numberOfRows || 6;
+  this.lastDropColumnIndex;
+  this.lastDropRowIndex;
   var grid = null;
   var self = this;
 
@@ -78,12 +80,14 @@ function Board(numberOfColumns, numberOfRows) {
 
 Board.prototype.drop = function drop(columnNumber, disc) {
   var columnIndex = columnNumber - 1;
+  this.lastDropColumnIndex = columnIndex;
 
   if (!this.isValidDrop(columnIndex)) {
     throw "Errors!"; // TODO Handle or change?
   }
 
-  this.setDiscAt(columnIndex, this.getNextEmptyRowIndex(columnIndex), disc);
+  this.lastDropRowIndex = this.getNextEmptyRowIndex(columnIndex);
+  this.setDiscAt(columnIndex, this.lastDropRowIndex, disc);
 };
 
 Board.prototype.getDiscAt = function getDiscAt(x, y) {
@@ -111,7 +115,7 @@ Board.prototype.display = function display() {
 };
 
 Board.prototype.isConnectFour = function isConnectFour() {
-  return solver.isConnectFour(this.getGrid());
+  return solver.isConnectFour(this.getGrid(), this.lastDropColumnIndex, this.lastDropRowIndex);
 };
 
 module.exports = Board;

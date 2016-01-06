@@ -1,5 +1,8 @@
 'use strict';
 
+var getGridElementSequence = require("./grid-element-sequence");
+var direction = require("./direction");
+
 function containsSameValues(array) {
   var i;
   var valueToCompare = array[0];
@@ -29,86 +32,33 @@ function isConnectFourInArray(discs) {
   return false;
 }
 
-function getStartOfSequence(grid, lastDropPoint, direction) {
-  var reverseDirection = {
-    x: direction.x * -1,
-    y: direction.y * -1
-  };
-  var currentPoint = lastDropPoint;
-  var nextPoint = lastDropPoint;
-
-  while (grid.isInBounds(nextPoint.x, nextPoint.y)) {
-    currentPoint = nextPoint;
-    nextPoint = {
-      x: lastDropPoint.x + reverseDirection.x,
-      y: lastDropPoint.y + reverseDirection.y
-    };
-  }
-
-  return currentPoint;
-}
-
-function getSequence(grid, lastDropPoint, direction) {
-  var currentPoint = getStartOfSequence(grid, lastDropPoint, direction);
-  var nextPoint = currentPoint;
-  var sequence = [];
-
-  while (grid.isInBounds(grid, nextPoint)) {
-    sequence.push(nextPoint);
-    nextPoint = {
-      x: lastDropPoint.x + direction.x,
-      y: lastDropPoint.y + direction.y
-    };
-  }
-}
-
-function isConnectFourInDirection(grid, lastDropPoint, direction) {
-  var discSequence = getSequence(grid, lastDropPoint, direction);
+function isConnectFourInDirection(grid, lastDropPoint, searchDirection) {
+  var discSequence = getGridElementSequence(grid, lastDropPoint, searchDirection);
 
   return isConnectFourInArray(discSequence);
 }
 
-var searchDirection = {
-  up: {
-    x: 1,
-    y: 0
-  },
-  down: {
-    x: 0,
-    y: 1
-  },
-  upRight: {
-    x: 1,
-    y: 1
-  },
-  upLeft: {
-    x: -1,
-    y: 1
-  }
-};
-
 module.exports = {
   isConnectFour: function (grid, lastDropX, lastDropY) {
-    return false;
 
     var lastDropPoint = {
       x: lastDropX,
       y: lastDropY
     };
-
-    if (isConnectFourInDirection(grid, lastDropPoint, searchDirection.up)) {
+    
+    if (isConnectFourInDirection(grid, lastDropPoint, direction.up)) {
       return true;
     }
 
-    if (isConnectFourInDirection(grid, lastDropPoint, searchDirection.down)) {
+    if (isConnectFourInDirection(grid, lastDropPoint, direction.right)) {
       return true;
     }
 
-    if (isConnectFourInDirection(grid, lastDropPoint, searchDirection.upRight)) {
+    if (isConnectFourInDirection(grid, lastDropPoint, direction.upRight)) {
       return true;
     }
 
-    if (isConnectFourInDirection(grid, lastDropPoint, searchDirection.upLeft)) {
+    if (isConnectFourInDirection(grid, lastDropPoint, direction.upLeft)) {
       return true;
     }
 

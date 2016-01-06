@@ -15,7 +15,7 @@ function Grid(width, height, emptyCellValue) {
     for (x = 0; x < width; x += 1) {
       column = [];
       for (y = 0; y < height; y += 1) {
-        column.push(self.emptyCellValue);
+        column.push(emptyCellValue);
       }
       rows.push(column);
     }
@@ -34,7 +34,7 @@ function Grid(width, height, emptyCellValue) {
   };
 
   this.isEmpty = function isEmpty (x, y) {
-    return grid[x][y] === self.emptyCellValue;
+    return grid[x][y] === emptyCellValue;
   };
 }
 

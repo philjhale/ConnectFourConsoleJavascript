@@ -1,52 +1,20 @@
 'use strict';
 
 var solver = require("./solver");
+var Grid = require("./grid");
 
 function Board(numberOfColumns, numberOfRows) {
   this.numberOfColumns = numberOfColumns || 7;
   this.numberOfRows = numberOfRows || 6;
   this.lastDropColumnIndex;
   this.lastDropRowIndex;
-  var grid = null;
+  var grid = new Grid(this.numberOfColumns, this.numberOfRows, "-");
   var self = this;
-
-  function getEmptyDisc() {
-    return "-";
-  }
-
-  function createGrid(width, height) {
-    var x, y;
-    var column = [];
-    var rows = [];
-    for (x = 0; x < width; x += 1) {
-      column = [];
-      for (y = 0; y < height; y += 1) {
-        column.push(getEmptyDisc());
-      }
-      rows.push(column);
-    }
-
-    return rows;
-  }
-
-  grid = createGrid(this.numberOfColumns, this.numberOfRows);
-
-  this.setDiscAt = function (x, y, disc) {
-    grid[x][y] = disc;
-  };
-
-  this.isEmptyDiscAt = function (x, y) {
-    return grid[x][y] === getEmptyDisc(); // TODO Improve?
-  };
-
-  this.getGrid = function () {
-    return grid;
-  };
 
   this.isColumnFull = function (columnIndex) {
     var y;
     for (y = 0; y < self.numberOfRows; y += 1) {
-      if (self.isEmptyDiscAt(columnIndex, y)) {
+      if (grid.isEmpty(columnIndex, y)) {
         return false;
       }
     }
@@ -55,6 +23,7 @@ function Board(numberOfColumns, numberOfRows) {
   };
 
   this.isValidDrop = function (columnIndex) {
+
     if (columnIndex < 0 || columnIndex >= self.numberOfColumns) {
       return false;
     }
@@ -69,53 +38,49 @@ function Board(numberOfColumns, numberOfRows) {
   this.getNextEmptyRowIndex = function (columnIndex) {
     var y;
     for (y = 0; y < self.numberOfRows; y += 1) {
-      if (self.isEmptyDiscAt(columnIndex, y)) {
+      if (grid.isEmpty(columnIndex, y)) {
         return y;
       }
     }
 
     throw "Column full";
   };
-}
 
-Board.prototype.drop = function drop(columnNumber, disc) {
-  var columnIndex = columnNumber - 1;
-  this.lastDropColumnIndex = columnIndex;
+  this.display = function () {
+    var x, y;
+    var line = '';
 
-  if (!this.isValidDrop(columnIndex)) {
-    throw "Errors!"; // TODO Handle or change?
-  }
-
-  this.lastDropRowIndex = this.getNextEmptyRowIndex(columnIndex);
-  this.setDiscAt(columnIndex, this.lastDropRowIndex, disc);
-};
-
-Board.prototype.getDiscAt = function getDiscAt(x, y) {
-  return this.getGrid()[x][y];
-};
-
-Board.prototype.display = function display() {
-  var x, y;
-  var line = '';
-
-  for (x = 1; x <= this.numberOfColumns; x += 1) {
-    line += x + "\t";
-  }
-  console.log(line);
-
-  line = '';
-  for (y = this.numberOfRows - 1; y >= 0; y -= 1) {
-    for (x = 0; x < this.numberOfColumns; x += 1) {
-      line += this.getDiscAt(x, y) + '\t';
+    for (x = 1; x <= self.numberOfColumns; x += 1) {
+      line += x + "\t";
     }
     console.log(line);
-    line = '';
-  }
-  console.log("-------------------------------------------------");
-};
 
-Board.prototype.isConnectFour = function isConnectFour() {
-  return solver.isConnectFour(this.getGrid(), this.lastDropColumnIndex, this.lastDropRowIndex);
-};
+    line = '';
+    for (y = self.numberOfRows - 1; y >= 0; y -= 1) {
+      for (x = 0; x < self.numberOfColumns; x += 1) {
+        line += grid.get(x, y) + '\t';
+      }
+      console.log(line);
+      line = '';
+    }
+    console.log("-------------------------------------------------");
+  };
+
+  this.drop = function (columnNumber, disc) {
+    var columnIndex = columnNumber - 1;
+    self.lastDropColumnIndex = columnIndex;
+
+    if (!self.isValidDrop(columnIndex)) {
+      throw "Errors!"; // TODO Handle or change?
+    }
+
+    self.lastDropRowIndex = self.getNextEmptyRowIndex(columnIndex);
+    grid.set(columnIndex, self.lastDropRowIndex, disc);
+  };
+
+  this.isConnectFour = function () {
+    return solver.isConnectFour(grid, self.lastDropColumnIndex, self.lastDropRowIndex);
+  };
+}
 
 module.exports = Board;

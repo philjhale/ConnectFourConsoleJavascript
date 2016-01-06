@@ -34,7 +34,7 @@ function isInBounds(grid, point) {
     return false;
   }
 
-  if (point.x >= grid.length || point.x >= grid[0].length) {
+  if (point.x >= grid.width || point.y >= grid.height) {
     return false;
   }
 
@@ -54,7 +54,7 @@ function getStartOfSequence(grid, lastDropPoint, direction) {
     nextPoint = {
       x: lastDropPoint.x + reverseDirection.x,
       y: lastDropPoint.y + reverseDirection.y
-    }
+    };
   }
 
   return currentPoint;
@@ -65,12 +65,12 @@ function getSequence(grid, lastDropPoint, direction) {
   var nextPoint = currentPoint;
   var sequence = [];
 
-  while(isInBounds(grid, nextPoint)) {
+  while (isInBounds(grid, nextPoint)) {
     sequence.push(nextPoint);
     nextPoint = {
       x: lastDropPoint.x + direction.x,
       y: lastDropPoint.y + direction.y
-    }
+    };
   }
 }
 
@@ -102,11 +102,11 @@ var searchDirection = {
 module.exports = {
   isConnectFour: function (grid, lastDropX, lastDropY) {
     return false;
-    
+
     var lastDropPoint = {
       x: lastDropX,
       y: lastDropY
-    }
+    };
 
     if (isConnectFourInDirection(grid, lastDropPoint, searchDirection.up)) {
       return true;

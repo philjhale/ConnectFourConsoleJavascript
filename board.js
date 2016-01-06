@@ -6,8 +6,8 @@ var Grid = require("./grid");
 function Board(numberOfColumns, numberOfRows) {
   this.numberOfColumns = numberOfColumns || 7;
   this.numberOfRows = numberOfRows || 6;
-  this.lastDropColumnIndex;
-  this.lastDropRowIndex;
+  this.lastDropColumnIndex = -1;
+  this.lastDropRowIndex = -1;
   var grid = new Grid(this.numberOfColumns, this.numberOfRows, "-");
   var self = this;
 
@@ -81,7 +81,7 @@ function Board(numberOfColumns, numberOfRows) {
   this.isConnectFour = function () {
     return solver.isConnectFour(grid, self.lastDropColumnIndex, self.lastDropRowIndex);
   };
-  
+
   this.getDiscAt = function (x, y) {
     return grid.get(x, y);
   };

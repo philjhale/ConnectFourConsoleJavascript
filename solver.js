@@ -53,7 +53,7 @@ function getSequence(grid, lastDropPoint, direction) {
   var nextPoint = currentPoint;
   var sequence = [];
 
-  while (isInBounds(grid, nextPoint)) {
+  while (grid.isInBounds(grid, nextPoint)) {
     sequence.push(nextPoint);
     nextPoint = {
       x: lastDropPoint.x + direction.x,

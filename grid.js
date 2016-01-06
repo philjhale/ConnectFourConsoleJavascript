@@ -25,29 +25,29 @@ function Grid(width, height, emptyCellValue) {
 
   grid = createGrid(this.width, this.height);
 
-  this.get = function get (x, y) {
+  this.get = function (x, y) {
     return grid[x][y];
   };
 
-  this.set = function set (x, y, obj) {
+  this.set = function (x, y, obj) {
     grid[x][y] = obj;
   };
 
-  this.isEmpty = function isEmpty (x, y) {
+  this.isEmpty = function (x, y) {
     return grid[x][y] === self.emptyCellValue;
   };
-  
+
   this.isInBounds = function (x, y) {
     if (x < 0 || y < 0) {
       return false;
     }
-  
+
     if (x >= this.width || y >= this.height) {
       return false;
     }
 
     return true;
-  }
+  };
 }
 
 module.exports = Grid;

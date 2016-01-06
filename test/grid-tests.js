@@ -29,4 +29,46 @@ describe("Grid", function() {
       expect(grid.isEmpty(1, 1)).to.equal(false);
     });
   });
+  
+  describe("isInBounds", function() {
+    it("x less than 0 out of bounds", function() {
+      var grid = new Grid(3, 4);
+      expect(grid.isInBounds(-1, 1)).to.equal(false);
+    });
+    
+    it("y less than 0 out of bounds", function() {
+      var grid = new Grid(3, 4);
+      expect(grid.isInBounds(1, -1)).to.equal(false);
+    });
+    
+    it("x equal to width out of bounds", function() {
+      var grid = new Grid(3, 4);
+      expect(grid.isInBounds(3, 1)).to.equal(false);
+    });
+    
+    it("x greater than width out of bounds", function() {
+      var grid = new Grid(3, 4);
+      expect(grid.isInBounds(4, 1)).to.equal(false);
+    });
+    
+    it("y equal to height out of bounds", function() {
+      var grid = new Grid(3, 4);
+      expect(grid.isInBounds(1, 4)).to.equal(false);
+    });
+    
+    it("y greater than height out of bounds", function() {
+      var grid = new Grid(3, 4);
+      expect(grid.isInBounds(1, 5)).to.equal(false);
+    });
+    
+    it("x and y min is in bounds", function() {
+      var grid = new Grid(3, 4);
+      expect(grid.isInBounds(0, 0)).to.equal(true);
+    });
+    
+    it("x and y max is in bounds", function() {
+      var grid = new Grid(3, 4);
+      expect(grid.isInBounds(2, 3)).to.equal(true);
+    });
+  });
 });

@@ -81,6 +81,10 @@ function Board(numberOfColumns, numberOfRows) {
   this.isConnectFour = function () {
     return solver.isConnectFour(grid, self.lastDropColumnIndex, self.lastDropRowIndex);
   };
+  
+  this.getDiscAt = function (x, y) {
+    return grid.get(x, y);
+  };
 }
 
 module.exports = Board;

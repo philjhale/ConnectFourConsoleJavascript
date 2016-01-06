@@ -3,7 +3,7 @@
 function Grid(width, height, emptyCellValue) {
   this.width = width;
   this.height = height;
-  var emptyCellValue = emptyCellValue || '-';
+  this.emptyCellValue = emptyCellValue || '-';
   var self = this;
 
   var grid;
@@ -15,7 +15,7 @@ function Grid(width, height, emptyCellValue) {
     for (x = 0; x < width; x += 1) {
       column = [];
       for (y = 0; y < height; y += 1) {
-        column.push(emptyCellValue);
+        column.push(self.emptyCellValue);
       }
       rows.push(column);
     }
@@ -34,20 +34,20 @@ function Grid(width, height, emptyCellValue) {
   };
 
   this.isEmpty = function isEmpty (x, y) {
-    return grid[x][y] === emptyCellValue;
+    return grid[x][y] === self.emptyCellValue;
   };
+  
+  this.isInBounds = function (x, y) {
+    if (x < 0 || y < 0) {
+      return false;
+    }
+  
+    if (x >= this.width || y >= this.height) {
+      return false;
+    }
+
+    return true;
+  }
 }
-
-Grid.prototype.get = function get (x, y) {
-  return this.get(x, y);
-};
-
-Grid.prototype.set = function set (x, y, obj) {
-  this.set(x, y, obj);
-};
-
-Grid.prototype.isEmpty = function isEmpty (x, y) {
-  return this.isEmpty(x, y);
-};
 
 module.exports = Grid;

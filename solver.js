@@ -29,18 +29,6 @@ function isConnectFourInArray(discs) {
   return false;
 }
 
-function isInBounds(grid, point) {
-  if (point.x < 0 || point.y < 0) {
-    return false;
-  }
-
-  if (point.x >= grid.width || point.y >= grid.height) {
-    return false;
-  }
-
-  return true;
-}
-
 function getStartOfSequence(grid, lastDropPoint, direction) {
   var reverseDirection = {
     x: direction.x * -1,
@@ -49,7 +37,7 @@ function getStartOfSequence(grid, lastDropPoint, direction) {
   var currentPoint = lastDropPoint;
   var nextPoint = lastDropPoint;
 
-  while (isInBounds(grid, nextPoint)) {
+  while (grid.isInBounds(nextPoint.x, nextPoint.y)) {
     currentPoint = nextPoint;
     nextPoint = {
       x: lastDropPoint.x + reverseDirection.x,

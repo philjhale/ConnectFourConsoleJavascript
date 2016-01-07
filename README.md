@@ -1,2 +1,2 @@
 # ConnectFourConsoleJavascript
-Connect four as a console app in Javascript
+This is an attempt to learn more about Node and Javascript

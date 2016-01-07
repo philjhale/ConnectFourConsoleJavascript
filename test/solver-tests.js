@@ -6,7 +6,11 @@ var Grid = require("../grid");
 
 describe("Solver", function() {
   var grid = new Grid(7, 6, "-");
-  
+
+  beforeEach(function() {
+    grid = new Grid(7, 6, "-");
+  });
+
   describe("isConnectFour", function() {
     /*
     - - - - - - -
@@ -54,10 +58,10 @@ describe("Solver", function() {
       grid.set(2, 1, "Y");
       grid.set(3, 1, "Y");
       var lastDropX = 1;
-      var lastDropY = 1; 
+      var lastDropY = 1;
       expect(solver.isConnectFour(grid, lastDropX, lastDropY)).to.equal(false);
     });
-    
+
     /*
     - - - - - - -
     - - - - - - -
@@ -71,11 +75,12 @@ describe("Solver", function() {
       grid.set(2, 1, "Y");
       grid.set(3, 1, "Y");
       grid.set(4, 1, "Y");
+
       var lastDropX = 1;
       var lastDropY = 1;
       expect(solver.isConnectFour(grid, lastDropX, lastDropY)).to.equal(true);
     });
-    
+
     /*
     - - - - - - -
     - - - - - - -
@@ -92,7 +97,7 @@ describe("Solver", function() {
       var lastDropY = 1;
       expect(solver.isConnectFour(grid, lastDropX, lastDropY)).to.equal(false);
     });
-    
+
     /*
     - - - - - - -
     - - - - Y - -
@@ -110,7 +115,7 @@ describe("Solver", function() {
       var lastDropY = 1;
       expect(solver.isConnectFour(grid, lastDropX, lastDropY)).to.equal(true);
     });
-    
+
     /*
     - - - - - - -
     - - - - - - -
@@ -127,7 +132,7 @@ describe("Solver", function() {
       var lastDropY = 1;
       expect(solver.isConnectFour(grid, lastDropX, lastDropY)).to.equal(false);
     });
-    
+
     /*
     - - - - - - -
     - - - - - - -
@@ -142,7 +147,7 @@ describe("Solver", function() {
       grid.set(4, 2, "Y");
       grid.set(3, 3, "Y");
       var lastDropX = 6;
-      var lastDropY = 1;
+      var lastDropY = 0;
       expect(solver.isConnectFour(grid, lastDropX, lastDropY)).to.equal(true);
     });
   });

@@ -17,14 +17,12 @@ function containsSameValues(array) {
 
 function isConnectFourInArray(discs) {
   var fourDiscs, i;
-  for (i = 0; i < discs.length - 4; i += 1) {
-    fourDiscs = discs.slice(i, i + 1);
-    // TODO Hard coded value
-    if (fourDiscs.indexOf("-") > -1) {
-      break;
-    }
 
-    if (containsSameValues(fourDiscs)) {
+  for (i = 0; i < discs.length - 4; i += 1) {
+    fourDiscs = discs.slice(i, i + 4);
+
+    // TODO Hard coded value
+    if (fourDiscs.indexOf("-") === -1 && containsSameValues(fourDiscs)) {
       return true;
     }
   }
@@ -34,7 +32,7 @@ function isConnectFourInArray(discs) {
 
 function isConnectFourInDirection(grid, lastDropPoint, searchDirection) {
   var discSequence = getGridElementSequence(grid, lastDropPoint, searchDirection);
-
+  
   return isConnectFourInArray(discSequence);
 }
 
@@ -45,7 +43,7 @@ module.exports = {
       x: lastDropX,
       y: lastDropY
     };
-    
+
     if (isConnectFourInDirection(grid, lastDropPoint, direction.up)) {
       return true;
     }

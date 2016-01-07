@@ -5,10 +5,10 @@ function getStartOfSequence(grid, lastDropPoint, direction) {
     x: direction.x * -1,
     y: direction.y * -1
   };
-  
+
   var currentPoint = lastDropPoint;
   var nextPoint = lastDropPoint;
- 
+
   while (grid.isInBounds(nextPoint.x, nextPoint.y)) {
     currentPoint = nextPoint;
 
@@ -16,7 +16,7 @@ function getStartOfSequence(grid, lastDropPoint, direction) {
       x: currentPoint.x + reverseDirection.x,
       y: currentPoint.y + reverseDirection.y
     };
-    
+
   }
 
   return currentPoint;
@@ -28,7 +28,7 @@ module.exports = function getGridElementSequence(grid, lastDropPoint, direction)
   var gridPointSequence = [];
   var gridObjectSequence = [];
   var i;
-  
+
   while (grid.isInBounds(nextPoint.x, nextPoint.y)) {
     gridPointSequence.push(nextPoint);
     currentPoint = nextPoint;

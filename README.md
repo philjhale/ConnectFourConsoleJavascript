@@ -1,2 +1,4 @@
 # ConnectFourConsoleJavascript
-Connect four as a console app in Javascript
+This is an attempt to learn more about Node and Javascript.
+
+Run using `npm install` then `node start.js`

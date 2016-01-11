@@ -3,10 +3,10 @@
 var readlineSync = require('readline-sync');
 
 module.exports = {
-  getRandomColumn: function (min, max) {
+  getRandomColumn: function getRandomColumn(min, max) {
     return Math.floor(Math.random() * (max - min + 1)) + min;
   },
-  getColumnFromPlayer: function (min, max) {
+  getColumnFromPlayer: function getColumnFromPlayer(min, max) {
     var columns = [];
     var selectionIndex;
     var i;
@@ -15,7 +15,7 @@ module.exports = {
       columns.push(i.toString());
     }
 
-    selectionIndex = readlineSync.keyInSelect(columns, "Select column", { cancel: false });
+    selectionIndex = readlineSync.keyInSelect(columns, 'Select column', { cancel: false });
     return Number(columns[selectionIndex]);
-  }
+  },
 };

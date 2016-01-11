@@ -1,13 +1,12 @@
 'use strict';
 
 function Game(player1, player2, board) {
+  var self = this;
+  var currentPlayerIndex = 1;
+  var players = [player1, player2];
   this.player1 = player1;
   this.player2 = player2;
   this.board = board;
-  var self = this;
-
-  var currentPlayerIndex = 1;
-  var players = [player1, player2];
 
   function getNextPlayer() {
     if (currentPlayerIndex === 1) {
@@ -19,7 +18,7 @@ function Game(player1, player2, board) {
     return players[currentPlayerIndex];
   }
 
-  this.play = function () {
+  this.play = function play() {
     var currentPlayer;
     var columnSelection;
 
@@ -27,21 +26,19 @@ function Game(player1, player2, board) {
 
     while (true) {
       currentPlayer = getNextPlayer();
-      console.log("%s's turn", currentPlayer.name);
+      console.log('%s\'s turn', currentPlayer.name);
       columnSelection = currentPlayer.getColumnInput(1, self.board.numberOfColumns);
-      console.log("%s chose %d", currentPlayer.name, columnSelection);
+      console.log('%s chose %d', currentPlayer.name, columnSelection);
       self.board.drop(columnSelection, currentPlayer.disc);
 
       self.board.display();
 
       if (self.board.isConnectFour()) {
-        console.log("%s has won!", currentPlayer.name);
+        console.log('%s has won!', currentPlayer.name);
         break;
       }
     }
   };
 }
-
-
 
 module.exports = Game;

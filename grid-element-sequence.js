@@ -3,7 +3,7 @@
 function getStartOfSequence(grid, lastDropPoint, direction) {
   var reverseDirection = {
     x: direction.x * -1,
-    y: direction.y * -1
+    y: direction.y * -1,
   };
 
   var currentPoint = lastDropPoint;
@@ -14,9 +14,8 @@ function getStartOfSequence(grid, lastDropPoint, direction) {
 
     nextPoint = {
       x: currentPoint.x + reverseDirection.x,
-      y: currentPoint.y + reverseDirection.y
+      y: currentPoint.y + reverseDirection.y,
     };
-
   }
 
   return currentPoint;
@@ -34,7 +33,7 @@ module.exports = function getGridElementSequence(grid, lastDropPoint, direction)
     currentPoint = nextPoint;
     nextPoint = {
       x: currentPoint.x + direction.x,
-      y: currentPoint.y + direction.y
+      y: currentPoint.y + direction.y,
     };
   }
 

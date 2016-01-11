@@ -1,7 +1,7 @@
 'use strict';
 
-var getGridElementSequence = require("./grid-element-sequence");
-var direction = require("./direction");
+var getGridElementSequence = require('./grid-element-sequence');
+var direction = require('./direction');
 
 function containsSameValues(array) {
   var i;
@@ -16,7 +16,8 @@ function containsSameValues(array) {
 }
 
 function isConnectFourInArray(discs, emptyCellValue) {
-  var fourDiscs, i;
+  var fourDiscs;
+  var i;
 
   for (i = 0; i < discs.length - 4; i += 1) {
     fourDiscs = discs.slice(i, i + 4);
@@ -36,11 +37,10 @@ function isConnectFourInDirection(grid, lastDropPoint, searchDirection) {
 }
 
 module.exports = {
-  isConnectFour: function (grid, lastDropX, lastDropY) {
-
+  isConnectFour: function isConnectFour(grid, lastDropX, lastDropY) {
     var lastDropPoint = {
       x: lastDropX,
-      y: lastDropY
+      y: lastDropY,
     };
 
     if (isConnectFourInDirection(grid, lastDropPoint, direction.up)) {
@@ -60,5 +60,5 @@ module.exports = {
     }
 
     return false;
-  }
+  },
 };
